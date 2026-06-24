@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>こよみ食堂（こよみしょくどう） | 築100年の古民家食堂</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#f4f0e6',       // Main base warm off-white, paper-like
+                            bgAlt: '#ebe5d7',    // Slightly darker for alternate sections
+                            text: '#2e2621',     // Deep warm charcoal/brown for main text
+                            textMuted: '#5e5349',// Muted text
+                            accent: '#ab5334',   // Terracotta / Rust, used for main CTAs and highlights
+                            line: '#b5a999',     // Lines, borders, dashed/dotted decor
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    boxShadow: {
+                        'float': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
+                        'sticky-nav': '0 -4px 15px -3px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base typography & selection styling */
+        ::selection {
+            background-color: #ab5334;
+            color: #ffffff;
+        }
+        body {
+            background-color: #f4f0e6;
+            color: #2e2621;
+        }
+
+        /* Typography specific utility */
+        .text-balanced {
+            text-wrap: balance;
+        }
+
+        /* Dotted placeholder component matching the visual direction */
+        .img-placeholder {
+            border: 2px dashed #b5a999;
+            background-color: rgba(235, 229, 215, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #5e5349;
+            font-size: 0.875rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .img-placeholder i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* Dashed separator */
+        .border-dashed-brand {
+            border-bottom: 1px dashed #c0b4a5;
+        }
+
+        /* Scrollytelling core classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays manually or let JS handle it */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Badge positioning override */
+        .absolute-badge {
+            position: absolute;
+            top: -20px;
+            right: 0;
+        }
+        @media (max-width: 768px) {
+            .absolute-badge {
+                position: relative;
+                float: right;
+                top: 0;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased pb-[80px] md:pb-0 selection:bg-brand-accent selection:text-white relative isolate">
+
+    <!-- MAIN WRAPPER -->
+    <div class="max-w-6xl mx-auto px-5 md:px-10 overflow-hidden">
+
+        <!-- HEADER & HERO SECTION -->
+        <header class="pt-8 pb-16 relative">
+
+            <!-- Top Nav / Identity -->
+            <div class="flex justify-between items-start mb-12 scroll-reveal">
+                <!-- Logo mark -->
+                <div class="flex items-center gap-3">
+                    <div class="border border-brand-accent text-brand-accent w-10 h-10 flex items-center justify-center font-serif font-bold text-sm leading-tight text-center rounded-[2px]" aria-hidden="true">
+                        こ<br>よ
+                    </div>
+                    <div>
+                        <h1 class="font-serif font-bold text-3xl tracking-wide text-brand-text">こよみ食堂</h1>
+                        <p class="text-xs font-sans mt-1 tracking-widest text-brand-textMuted">（こよみしょくどう）</p>
+                    </div>
+                </div>
+
+                <!-- Floating Round Status Badge -->
+                <div class="absolute-badge group z-10 hidden sm:block">
+                    <div class="bg-brand-accent text-white rounded-full w-28 h-28 flex items-center justify-center shadow-lg relative p-1 transition-transform duration-500 hover:scale-105">
+                        <div class="border-[1.5px] border-dashed border-white/60 w-full h-full rounded-full flex flex-col items-center justify-center font-sans font-medium text-sm leading-snug">
+                            <span>11:00〜</span>
+                            <span>売り切れ次第</span>
+                            <span>終了</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Layout -->
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+
+                <!-- Text Content -->
+                <div class="flex-1 w-full scroll-reveal delay-100">
+                    <h2 class="font-serif font-bold text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.4] mb-8 text-balanced">
+                        築100年の古民家で、<br>
+                        売り切れ御免の定食を。
+                    </h2>
+
+                    <div class="mb-10 font-sans text-lg">
+                        <p class="font-bold text-brand-text tracking-widest mb-1">こよみ食堂 <span class="text-sm font-normal text-brand-textMuted ml-1">（こよみしょくどう）</span></p>
+                        <p class="text-brand-textMuted">食堂・定食・居酒屋</p>
+                    </div>
+
+                    <!-- Action Buttons (Desktop) -->
+                    <div class="hidden md:flex flex-row items-center gap-4">
+                        <a href="tel:0860000000" class="bg-brand-accent text-white flex items-center gap-3 px-8 py-4 rounded hover:bg-[#9a4a2f] transition-colors shadow-sm group">
+                            <i class="ph ph-phone text-xl group-hover:-translate-rotate-12 transition-transform"></i>
+                            <span class="font-bold tracking-wider">電話する 086-000-0000</span>
+                        </a>
+                        <a href="#access" class="bg-transparent border bg-white/50 border-brand-accent text-brand-accent flex items-center gap-3 px-8 py-4 rounded hover:bg-white transition-colors">
+                            <i class="ph ph-map-pin text-xl"></i>
+                            <span class="font-bold tracking-wider">地図で行き方</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Placeholder Frame -->
+                <div class="w-full lg:w-[45%] scroll-reveal delay-200">
+                    <div class="img-placeholder aspect-[4/3] rounded-sm w-full group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-bgAlt opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none"></div>
+                        <i class="ph ph-image text-3xl mb-3 text-brand-line"></i>
+                        <p class="font-sans text-brand-textMuted leading-relaxed">店舗外観・内観<br>写真</p>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- DIVIDER -->
+        <div class="w-full h-px bg-brand-line/30 my-8"></div>
+
+        <!-- MENU SECTION -->
+        <section id="menu" class="py-16">
+            <h3 class="font-serif font-bold text-2xl md:text-3xl mb-12 flex items-center gap-4 scroll-reveal">
+                <span class="text-brand-text">看板メニュー</span>
+                <div class="h-px bg-brand-line/50 flex-grow max-w-[80px]"></div>
+            </h3>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+
+                <!-- Menu Item 1 -->
+                <div class="flex flex-col items-center text-center group scroll-reveal delay-100">
+                    <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
+                        <p class="leading-loose text-sm">料理写真：<br>日替わり定食</p>
+                    </div>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">日替わり定食</h4>
+                    <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">980<span class="text-sm font-normal">円</span></p>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="flex flex-col items-center text-center group scroll-reveal delay-200">
+                    <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
+                        <p class="leading-loose text-sm">料理写真：<br>からあげ定食</p>
+                    </div>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">からあげ定食</h4>
+                    <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">1,050<span class="text-sm font-normal">円</span></p>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="flex flex-col items-center text-center group scroll-reveal delay-300">
+                    <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
+                        <p class="leading-loose text-sm">料理写真：<br>焼き魚定食</p>
+                    </div>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">焼き魚定食</h4>
+                    <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">1,100<span class="text-sm font-normal">円</span></p>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="flex flex-col items-center text-center group scroll-reveal delay-[400ms]">
+                    <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
+                        <p class="leading-loose text-sm">料理写真：<br>こよみ御膳</p>
+                    </div>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">こよみ御膳</h4>
+                    <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">1,480<span class="text-sm font-normal">円</span></p>
+                </div>
+
+            </div>
+
+            <p class="text-right text-xs mt-6 text-brand-textMuted scroll-reveal">※仕入れ状況により内容・価格が変わる場合があります。</p>
+        </section>
+
+    </div><!-- End max-w wrapper for main content edge alignment -->
+
+    <!-- ABOUT / BRAND STORY SECTION (Full bleed background wrapper) -->
+    <section class="bg-brand-bgAlt py-20 lg:py-28 my-8 border-y border-brand-line/20">
+        <div class="max-w-6xl mx-auto px-5 md:px-10 flex flex-col md:flex-row gap-12 lg:gap-20 items-center">
+
+            <!-- Left Image Box -->
+            <div class="w-full md:w-1/2 scroll-reveal">
+                <div class="img-placeholder aspect-[4/3] rounded-sm w-full bg-brand-bg/50">
+                    <i class="ph ph-image text-3xl mb-3 text-brand-line"></i>
+                    <p class="font-sans text-brand-textMuted leading-relaxed">古民家の雰囲気・<br>店内の写真</p>
+                </div>
+            </div>
+
+            <!-- Right Text -->
+            <div class="w-full md:w-1/2 scroll-reveal delay-100 text-balanced">
+                <h3 class="font-serif font-bold text-2xl lg:text-3xl leading-[1.6] mb-8">
+                    築100年超の古民家を再生した、<br>
+                    倉敷の隠れ家食堂。
+                </h3>
+                <div class="font-sans text-[15px] leading-[2.2] text-brand-text">
+                    <p class="mb-4">長い時間を重ねてきた木のぬくもりが残る空間で、<br class="hidden sm:block">手づくりの定食を気がねなく。</p>
+                    <p class="mb-4">地元の方はもちろん、観光で訪れる方にも親しまれる<br class="hidden sm:block">昼の定食食堂です。</p>
+                    <p>売り切れ次第終了のため、早めのご来店がおすすめです。</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INFO & ACCESS WRAPPER -->
+    <div class="max-w-6xl mx-auto px-5 md:px-10 pb-20">
+
+        <!-- STORE INFO SECTION -->
+        <section class="py-16">
+            <h3 class="font-serif font-bold text-2xl mb-10 scroll-reveal">店舗情報</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-0 text-[15px]">
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border">
+                    <i class="ph ph-clock text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">営業時間</p>
+                        <p>11:00〜売り切れ次第終了</p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border delay-100">
+                    <i class="ph ph-house text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">個室</p>
+                        <p>個室なし</p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border">
+                    <i class="ph ph-chair text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">席数</p>
+                        <p>30席 <span class="text-sm">（カウンター4・<br class="hidden sm:block">2階座敷4テーブル・板間4テーブル）</span></p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border delay-100">
+                    <i class="ph ph-users text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">貸切</p>
+                        <p>貸切可</p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border">
+                    <i class="ph ph-cigarette-slash text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div class="mt-0.5">
+                        <p class="tracking-wide">全席禁煙</p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border delay-100">
+                    <i class="ph ph-money text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">支払い方法</p>
+                        <p>現金のみ <span class="text-sm">（カード・電子マネー・QR不可）</span></p>
+                    </div>
+                </div>
+
+                <!-- Info Row -->
+                <div class="flex items-start gap-4 py-5 border-dashed-brand scroll-reveal box-border">
+                    <i class="ph ph-car text-2xl text-brand-accent shrink-0 mt-0.5"></i>
+                    <div>
+                        <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">駐車場</p>
+                        <p>なし</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ACCESS SECTION -->
+        <section id="access" class="py-16 pt-8 border-t border-brand-line/30">
+            <h3 class="font-serif font-bold text-2xl mb-10 scroll-reveal">アクセス</h3>
+
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                <!-- Text Detail -->
+                <div class="w-full lg:w-2/5 flex flex-col gap-6 text-[15px]">
+
+                    <div class="flex items-start gap-3 scroll-reveal">
+                        <i class="ph ph-map-pin text-xl text-brand-accent shrink-0 mt-1"></i>
+                        <div>
+                            <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">住所</p>
+                            <p>岡山県倉敷市本町1-8</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 scroll-reveal">
+                        <i class="ph ph-train text-xl text-brand-accent shrink-0 mt-1"></i>
+                        <div>
+                            <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">最寄り・徒歩</p>
+                            <p class="leading-relaxed">
+                                JR倉敷駅より徒歩約10分<br>
+                                <span class="text-sm text-brand-textMuted">（倉敷美観地区エリア）</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 scroll-reveal">
+                        <i class="ph ph-phone text-xl text-brand-accent shrink-0 mt-1"></i>
+                        <div>
+                            <p class="font-bold tracking-widest text-[#5d4f44] text-xs mb-1">電話</p>
+                            <p class="text-xl text-brand-accent font-bold tracking-wider">086-000-0000</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Map Frame Placeholder -->
+                <div class="w-full lg:w-3/5 scroll-reveal delay-100">
+                    <div class="img-placeholder bg-white/50 aspect-[4/3] sm:aspect-video rounded-sm w-full relative group">
+                        <i class="ph ph-map-pin text-4xl mb-4 text-brand-line group-hover:text-brand-accent transition-colors duration-500"></i>
+                        <p class="font-sans text-brand-textMuted tracking-wider">Googleマップ埋め込みエリア</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- End Max-width Container -->
+
+    <!-- FOOTER -->
+    <footer class="bg-[#ebe5d7] border-t border-brand-line/20 py-16 text-center pb-28 md:pb-16">
+        <div class="scroll-reveal">
+            <h2 class="font-serif font-bold text-2xl mb-2 text-brand-text">こよみ食堂 <span class="text-sm font-sans font-normal text-brand-textMuted">（こよみしょくどう）</span></h2>
+            <p class="text-sm font-sans tracking-widest mb-6">食堂・定食・居酒屋</p>
+
+            <address class="not-italic text-sm leading-relaxed text-brand-textMuted inline-block text-left">
+                住所：岡山県倉敷市本町1-8<br>
+                電話：086-000-0000<br>
+                営業時間：11:00〜売り切れ次第終了
+            </address>
+            <p class="text-[10px] mt-12 text-brand-textMuted tracking-widest uppercase opacity-70">© Koyomi Shokudo</p>
+            <p class="text-[10px] mt-3 text-brand-textMuted tracking-wider opacity-80">※本サイトは制作サンプルです（架空の店舗・情報）。</p>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY ACTION BAR -->
+    <div class="fixed bottom-0 left-0 w-full z-50 md:hidden flex flex-row items-stretch shadow-sticky-nav h-[72px] bg-white border-t border-brand-line/20 transform transition-transform duration-300" id="sticky-bar">
+        <!-- Call Button -->
+        <a href="tel:0860000000" class="flex-1 bg-brand-accent text-white flex gap-2 items-center justify-center active:bg-[#9a4a2f] transition-colors">
+            <i class="ph ph-phone pb-0.5 text-xl"></i>
+            <span class="font-bold text-sm tracking-widest">電話する 086-000-0000</span>
+        </a>
+        <!-- Map Button -->
+        <a href="#access" class="flex-1 bg-white text-brand-accent flex gap-2 items-center justify-center active:bg-brand-bgAlt transition-colors border-l border-brand-line/30">
+            <i class="ph ph-map-pin pb-0.5 text-xl"></i>
+            <span class="font-bold text-sm tracking-widest">地図で行き方</span>
+        </a>
+    </div>
+
+    <!-- Scrollytelling JS setup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Unobserve after reveal to only animate once
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+            revealElements.forEach(el => observer.observe(el));
+
+            // Immediately reveal items at the top
+            setTimeout(() => {
+                revealElements.forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add('is-visible');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>
