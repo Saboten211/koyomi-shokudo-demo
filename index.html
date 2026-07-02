@@ -59,6 +59,14 @@
             text-wrap: balance;
         }
 
+        /* Japanese phrase-based line breaking (BudouX <wbr> insertion points).
+           Only apply to elements where <wbr> has been inserted; keep-all alone
+           without a break point would let overflow-wrap:anywhere cut mid-word. */
+        .bdx {
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+        }
+
         /* Dotted placeholder component matching the visual direction */
         .img-placeholder {
             border: 2px dashed #b5a999;
@@ -158,9 +166,9 @@
 
                 <!-- Text Content -->
                 <div class="flex-1 w-full scroll-reveal delay-100">
-                    <h2 class="font-serif font-bold text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.4] mb-8 text-balanced">
-                        築100年の古民家で、<br>
-                        売り切れ御免の定食を。
+                    <h2 class="font-serif font-bold text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.4] mb-8 text-balanced bdx">
+                        築100年の<wbr>古民家で、<br>
+                        売り切れ御免の<wbr>定食を。
                     </h2>
 
                     <div class="mb-10 font-sans text-lg">
@@ -172,11 +180,11 @@
                     <div class="hidden md:flex flex-row items-center gap-4">
                         <a href="tel:0860000000" class="bg-brand-accent text-white flex items-center gap-3 px-8 py-4 rounded hover:bg-[#9a4a2f] transition-colors shadow-sm group">
                             <i class="ph ph-phone text-xl group-hover:-translate-rotate-12 transition-transform"></i>
-                            <span class="font-bold tracking-wider">電話する 086-000-0000</span>
+                            <span class="font-bold tracking-wider bdx">電話する<wbr> 086-000-0000</span>
                         </a>
                         <a href="#access" class="bg-transparent border bg-white/50 border-brand-accent text-brand-accent flex items-center gap-3 px-8 py-4 rounded hover:bg-white transition-colors">
                             <i class="ph ph-map-pin text-xl"></i>
-                            <span class="font-bold tracking-wider">地図で行き方</span>
+                            <span class="font-bold tracking-wider bdx">地図で<wbr>行き方</span>
                         </a>
                     </div>
                 </div>
@@ -210,7 +218,7 @@
                     <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
                         <p class="leading-loose text-sm">料理写真：<br>日替わり定食</p>
                     </div>
-                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">日替わり定食</h4>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors bdx">日替わり定食</h4>
                     <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">980<span class="text-sm font-normal">円</span></p>
                 </div>
 
@@ -219,7 +227,7 @@
                     <div class="img-placeholder w-full aspect-[3/4] mb-5 rounded-sm p-4">
                         <p class="leading-loose text-sm">料理写真：<br>からあげ定食</p>
                     </div>
-                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors">からあげ定食</h4>
+                    <h4 class="font-serif font-bold text-lg mb-2 text-brand-text group-hover:text-brand-accent transition-colors bdx">からあげ定食</h4>
                     <p class="font-sans font-bold text-xl text-brand-accent tracking-widest mt-auto">1,050<span class="text-sm font-normal">円</span></p>
                 </div>
 
@@ -262,9 +270,9 @@
 
             <!-- Right Text -->
             <div class="w-full md:w-1/2 scroll-reveal delay-100 text-balanced">
-                <h3 class="font-serif font-bold text-2xl lg:text-3xl leading-[1.6] mb-8">
-                    築100年超の古民家を再生した、<br>
-                    倉敷の隠れ家食堂。
+                <h3 class="font-serif font-bold text-2xl lg:text-3xl leading-[1.6] mb-8 bdx">
+                    築100年超の<wbr>古民家を<wbr>再生した、<br>
+                    倉敷の<wbr>隠れ家食堂。
                 </h3>
                 <div class="font-sans text-[15px] leading-[2.2] text-brand-text">
                     <p class="mb-4">長い時間を重ねてきた木のぬくもりが残る空間で、<br class="hidden sm:block">手づくりの定食を気がねなく。</p>
@@ -420,12 +428,12 @@
         <!-- Call Button -->
         <a href="tel:0860000000" class="flex-1 bg-brand-accent text-white flex gap-2 items-center justify-center active:bg-[#9a4a2f] transition-colors">
             <i class="ph ph-phone pb-0.5 text-xl"></i>
-            <span class="font-bold text-sm tracking-widest">電話する 086-000-0000</span>
+            <span class="font-bold text-sm tracking-widest bdx">電話する<wbr> 086-000-0000</span>
         </a>
         <!-- Map Button -->
         <a href="#access" class="flex-1 bg-white text-brand-accent flex gap-2 items-center justify-center active:bg-brand-bgAlt transition-colors border-l border-brand-line/30">
             <i class="ph ph-map-pin pb-0.5 text-xl"></i>
-            <span class="font-bold text-sm tracking-widest">地図で行き方</span>
+            <span class="font-bold text-sm tracking-widest bdx">地図で<wbr>行き方</span>
         </a>
     </div>
 
